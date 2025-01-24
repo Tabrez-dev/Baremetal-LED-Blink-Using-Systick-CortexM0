@@ -61,11 +61,39 @@ The full implementation of the project can be found in the [main.c](main.c) file
    ```bash
    make
    ```
-3. Flash the `.elf` file to the board using OpenOCD:
+---
+
+## Debugging with OpenOCD via Telnet
+
+1. **Start OpenOCD in Telnet mode**:
    ```bash
-   openocd -f stm32f0discovery.cfg -c "program boot_up.elf verify reset exit"
+   openocd -f board/stm32f0discovery.cfg 
    ```
 
+2. **Connect via Telnet**:
+   ```bash
+   telnet localhost 4444
+   ```
+
+3. **Common Commands**:
+   - Halt the target: `halt`
+   - Reset the target: `reset`
+   - Step through code: `step`
+   - View CPU registers: `reg`
+
+---
+
+## Flashing with `st-flash`
+
+1. **Install `st-flash`** (if not already installed):
+   ```bash
+   sudo apt-get install stlink-tools
+   ```
+
+2. **Flash the firmware**:
+```bash
+make flash
+```
 ---
 
 ## Disclaimer
