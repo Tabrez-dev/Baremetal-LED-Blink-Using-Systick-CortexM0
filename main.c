@@ -58,20 +58,20 @@ struct systick {
 };
 #define SYSTICK ((struct systick *) 0xE000E010)
 static inline void systick_init(uint32_t ticks) {
- RCC->APB2ENR |= 1;
+ RCC->APB2ENR |= (1<<0);
  if((ticks-1) > 0xffffff) return;
- SYSTICK->CSR = (BIT(0) | BIT(1) | BIT(2));
- SYSTICK->CVR = 0;
+
  SYSTICK->RVR = ticks - 1;
+ SYSTICK->CVR = 0;
+ SYSTICK->CSR = 0x00000007;
+
 }
 //those values in memory that get updated by interrupt handlers, or by the hardware, declare as volatile
-static bool onn=true;
+//static bool onn=true;
 
 static volatile uint32_t s_ticks;
 void SysTick_Handler(void) {
-    //s_ticks++;
-    gpio_write(led,onn);//every 'period' ms 
-    onn=!onn;
+   s_ticks++;
 }
 
 // Check if the timer has expired
@@ -80,11 +80,9 @@ void SysTick_Handler(void) {
 //  interval: timer interval in milliseconds
 //  currentTime: current system time in milliseconds
 // Returns true if the timer has expired, false otherwise
-
 /*
 We use the timerExpired function to check if a user-defined timer has elapsed based on a 1ms system tick, avoiding the need to manually calculate expiration logic every time we use the timer.
 */
-#if 0
 bool timerExpired(uint32_t *expirationTime, uint32_t interval, uint32_t currentTime) {
     // Handle timer wrap-around by resetting the expiration time
     if (currentTime + interval < *expirationTime) {
@@ -106,46 +104,34 @@ bool timerExpired(uint32_t *expirationTime, uint32_t interval, uint32_t currentT
     }
     return true;  // Timer has expired
 }
-#endif
-// t: expiration time, prd: period, now: current time. Return true if expired
-bool timer_expired(uint32_t *t, uint32_t prd, uint32_t now) {
 
-    if (now + prd < *t) *t = 0;                    // Time wrapped? Reset timer
-  if (*t == 0) *t = now + prd;                   // Firt poll? Set expiration
-  if (*t > now) return false;                    // Not expired yet, return
-  *t = (now - *t) > prd ? now + prd : *t + prd;  // Next expiration time
-  return true;                                   // Expired, return true
-}
 int main(void){
     
     //uint16_t led=PIN('C',6);
     RCC_GPIO_CLK_ENABLE(PINBANK(led));
     gpio_set_mode(led, GPIO_MODE_OUTPUT);
-systick_init(8000000/1000);//tick every 1 ms
-    for (;;) {
+   /* for (;;) {
 
      gpio_write(led, 1);
       spin(999999);
      gpio_write(led, 0);
       spin(999999);
    
-    }
+    }*/
 
 
-   // systick_init(8000000/1000);//tick every 1 ms
+   systick_init(8000000/1000);//tick every 1 ms
 
-//    uint32_t timer=0, period=500;
-  //  for(;;){
-  //   if(timer_expired(&timer, period, s_ticks)){
-         //gpio_write(led,1);//every 'period' ms 
-
-      //   static bool on;
-      //   gpio_write(led,on);//every 'period' ms 
-      //   on=!on;//toggle led state
-    //    }
+   uint32_t timer=0, period=500;
+    for(;;){
+     if(timerExpired(&timer, period, s_ticks)){
+         static bool on;
+         gpio_write(led,on);//every 'period' ms 
+         on=!on;//toggle led state
+        }
 
      //Here we can perform other activities
-   // }
+    }
     return 0;
 }
 
