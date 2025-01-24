@@ -71,5 +71,10 @@ The full implementation of the project can be found in the [main.c](main.c) file
 ## Disclaimer
 This code has been written to the best of my understanding of the Cortex-M0 Technical Reference Manual (TRM) and the STM32F072RB-DISCO user manual. However, the SysTick timer caused a hard fault for reasons I couldn't debug. Despite this, the project was an excellent learning experience. If you identify the issue or have improvements, feel free to submit a pull request!
 
+![image](https://github.com/user-attachments/assets/5ac45c2f-3530-4dba-a99e-5de7d9a9afd0)
+
+I have refferred to the cortex M0 TRM and used base address of CSR register.
+
+
 ---
 
