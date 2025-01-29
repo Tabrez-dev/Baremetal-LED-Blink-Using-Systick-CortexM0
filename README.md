@@ -63,3 +63,7 @@ Using ST-Link Reflash Utility and Segger Ozone for Debugging
 Download [Ozone](https://www.segger.com/products/development-tools/ozone-j-link-debugger/) from the Segger website. Before we can use it with our discovery board, we need to convert the **ST-LINK firmware** on the onboard debugger to **J-Link firmware** that Ozone understands. Follow the instructions on the Segger site [here](https://www.segger.com/products/debug-probes/j-link/models/other-j-links/st-link-on-board/) to update your **ST-Link** to **J-Link** firmware.
 
 After the J-Link firmware is installed on the ST-Link, you can use Segger Ozone for advanced debugging of your STM32 microcontroller project.
+
+![image](https://github.com/user-attachments/assets/a458cbcc-68ad-4df5-b715-e30ca1bf9022)
+
+Do Not Forget To Add .svd file in **Peripherals** to use Ozone properly for this board. Use appropriate .svd file for your board. 
