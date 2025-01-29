@@ -1,108 +1,65 @@
-# Baremetal LED Blink Using SysTick (Cortex-M0)
+# STM32-Systick-Device-Driver-Cortex-M0
 
-## Project Overview
-This repository demonstrates a bare-metal implementation of LED blinking on the STM32F072RB-DISCO board using the SysTick timer of the Cortex-M0. It is a minimalistic program designed to showcase GPIO control, SysTick timer initialization, and non-blocking multitasking techniques.
+This repository provides a bare-metal **SysTick** driver for the STM32F072RBT6 Cortex-M0 microcontroller, enabling the configuration of SysTick in both **polling** and **interrupt** modes. It also includes human-readable functions for GPIO initialization and a Makefile that supports flashing via **J-Link** and **ST-Flash** (ST-Link v2). 
 
-### Inspiration
-This project is inspired by the [bare-metal-programming-guide](https://github.com/cpq/bare-metal-programming-guide?tab=readme-ov-file). I am deeply grateful to the author of that repository for their clear and insightful explanation of embedded programming concepts.
+**Inspiration**
+This project is inspired by the bare-metal-programming-guide. I am deeply grateful to the author of that repository for their clear and insightful explanation of embedded programming concepts.
 
----
+## Features:
+- **SysTick Configuration**: 
+  - Configure SysTick in **polling** mode for basic delay functionality.
+  - Configure SysTick in **interrupt** mode for more efficient, interrupt-driven timing.
 
-## Technical Details
+- **GPIO Initialization**: 
+  - Provides human-readable functions to configure GPIO pins for input/output modes.
 
-### GPIO Control
-The GPIO (General Purpose Input/Output) peripheral is configured using a `struct` that maps to the hardware registers. Pin control is achieved using:
+- **Makefile**:
+  - Includes targets for flashing the firmware using **J-Link** and **ST-Flash (ST-Link v2)**.
+  - **J-Link** is used for debugging via Segger Ozone.
+  - **ST-Link** is another way of flashing firmware.
 
-- **Mode Register (MODER):** Configures the mode of a pin (Input, Output, Alternate Function, or Analog).
-- **Bit Set/Reset Register (BSRR):** Used for atomic pin state changes (set/reset).
+## Development Journey:
+- **Segger Ozone Debugging**: 
+  - During the development of this project, I learned to use **Segger Ozone** for debugging, which helped me analyze the behavior of the code and troubleshoot issues efficiently.
+  
+- **ST-Link & J-Link**: 
+  - I gained hands-on experience with **ST-Link** and **J-Link** tools for flashing and debugging STM32 devices. This repository includes a Makefile to easily flash the device with either tool.
 
-### SysTick Timer
-The SysTick timer is initialized to generate periodic interrupts at a 1ms interval. The key registers involved are:
+- **System-On-Chip (SoC) User Guide**:
+  - I learned the importance of referring to the **SoC-specific user guides** to understand the functionalities of various hardware features, such as the **SysTick timer**, which is covered in the **Cortex-M0 User Guide** for STM32F0 series.
 
-- **CSR (Control and Status Register):** Configures the timer and enables its interrupt.
-- **RVR (Reload Value Register):** Sets the countdown value for the timer.
-- **CVR (Current Value Register):** Tracks the current countdown value.
+## Getting Started:
 
-### Timer Expired Function
-The `timerExpired` function abstracts periodic task scheduling by checking if a timer has elapsed. It handles wrap-around scenarios and allows for precise non-blocking delays.
-
-#### Function Logic
-1. Checks if the expiration time has been initialized or wrapped around.
-2. Compares the expiration time with the current system time (`s_ticks`).
-3. If expired, updates the expiration time for the next interval.
-
-This approach minimizes CPU usage and ensures accurate timing without blocking execution.
-
----
-
-## Code
-The full implementation of the project can be found in the [main.c](main.c) file. Key functionalities include:
-
-1. GPIO pin initialization for LED control.
-2. SysTick timer initialization.
-3. Non-blocking LED blinking using the `timerExpired` function.
-4. Minimal startup code for Cortex-M0, including vector table setup.
-
----
-
-## Getting Started
-### Prerequisites
-- STM32F072RB-DISCO board
-- ARM GCC Toolchain
-- OpenOCD for flashing
-
-### Build and Flash Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/Baremetal-LED-Blink-Using-Systick-CortexM0.git
-   cd Baremetal-LED-Blink-Using-Systick-CortexM0
+1. **Clone the Repository**:
    ```
-2. Build the project using the provided Makefile:
-   ```bash
-   make
-   ```
----
-
-## Debugging with OpenOCD via Telnet
-
-1. **Start OpenOCD in Telnet mode**:
-   ```bash
-   openocd -f board/stm32f0discovery.cfg 
+   git clone https://github.com/Tabrez-dev/STM32-Systick-Device-Driver-Cortex-M0.git
+   cd STM32-Systick-Device-Driver-Cortex-M0
    ```
 
-2. **Connect via Telnet**:
-   ```bash
-   telnet localhost 4444
+2. **Build the Project**:
+   Use the provided **Makefile** to build the project:
+   ```
+   make build
    ```
 
-3. **Common Commands**:
-   - Halt the target: `halt`
-   - Reset the target: `reset`
-   - Step through code: `step`
-   - View CPU registers: `reg`
+3. **Flash the Firmware**:
+   Use **J-Link** or **ST-Link** to flash the firmware. The Makefile provides targets to flash the device with either tool:
+   
+   - Flash with **J-Link**:
+     ```
+     make flash-jlink
+     ```
+   - Flash with **ST-Link**:
+     ```
+     make flash-stlink
+     ```
 
----
+5. **Debugging**:
+   - For debugging, use **Segger Ozone** with **J-Link** to step through the code and analyze register/memory states.
+   - Alternatively, use **ST-Link** for simple debugging using tools like OpenOCD.
 
-## Flashing with `st-flash`
+Using ST-Link Reflash Utility and Segger Ozone for Debugging
 
-1. **Install `st-flash`** (if not already installed):
-   ```bash
-   sudo apt-get install stlink-tools
-   ```
+Download [Ozone](https://www.segger.com/products/development-tools/ozone-j-link-debugger/) from the Segger website. Before we can use it with our discovery board, we need to convert the **ST-LINK firmware** on the onboard debugger to **J-Link firmware** that Ozone understands. Follow the instructions on the Segger site [here](https://www.segger.com/products/debug-probes/j-link/models/other-j-links/st-link-on-board/) to update your **ST-Link** to **J-Link** firmware.
 
-2. **Flash the firmware**:
-```bash
-make flash
-```
----
-
-## Disclaimer
-This code has been written to the best of my understanding of the Cortex-M0 Technical Reference Manual (TRM) and the STM32F072RB-DISCO user manual. However, the SysTick timer caused a hard fault for reasons I couldn't debug. Despite this, the project was an excellent learning experience. If you identify the issue or have improvements, feel free to submit a pull request!
-
-![image](https://github.com/user-attachments/assets/5ac45c2f-3530-4dba-a99e-5de7d9a9afd0)
-
-I have refferred to the cortex M0 TRM and used base address of CSR register.
-
-
----
-
+After the J-Link firmware is installed on the ST-Link, you can use Segger Ozone for advanced debugging of your STM32 microcontroller project.
