@@ -1,6 +1,6 @@
 # STM32-Systick-Device-Driver-Cortex-M0
 
-This repository provides a bare-metal **SysTick** driver for the STM32F072RBT6 Cortex-M0 microcontroller, enabling the configuration of SysTick in both **polling** and **interrupt** modes. It also includes human-readable functions for GPIO initialization and a Makefile that supports flashing via **J-Link** and **ST-Flash** (ST-Link v2). 
+This repository provides a bare-metal **SysTick** driver for the STM32F072RBT6 Cortex-M0 microcontroller, enabling the configuration of SysTick in both **polling** and **interrupt** modes. It also includes human-readable functions for GPIO initialization and a Makefile that supports flashing via **J-Link** and **ST-Flash** ([ST-Link v2](https://www.st.com/en/development-tools/stsw-link009.html)). 
 
 **Inspiration**
 
