@@ -62,10 +62,24 @@ firmware.bin: firmware.elf
 firmware.elf: $(SOURCES)
 	arm-none-eabi-gcc $(SOURCES) $(CFLAGS) $(LDFLAGS) -o $@
 
-# Use 'st-flash' to flash the firmware onto the device
-# --reset tells the programmer to reset the device after flashing
-# write $< 0x08000000 writes the firmware binary to address 0x08000000
-flash: firmware.bin
+# Flash with J-Link (ST-LINK USB)
+jflash: jflash.script
+	JLinkExe -commanderscript $<
+
+# Device Configuration (Change this if using a different STM32 variant)
+DEVICE = STM32F072RB
+
+jflash.script: firmware.bin
+	@echo "device $(DEVICE)" > $@
+	@echo "speed 4000" >> $@
+	@echo "si SWD" >> $@       # Force SWD interface to avoid manual selection
+	@echo "loadbin $< 0x08000000" >> $@
+	@echo "r" >> $@            # Reset
+	@echo "g" >> $@            # Start execution
+	@echo "qc" >> $@           # Quit J-Link
+
+# Flash with ST-Link
+stflash: firmware.bin
 	st-flash --reset write $< 0x08000000
 
 # Remove any files that start with 'firmware.' (e.g., firmware.elf, firmware.bin)

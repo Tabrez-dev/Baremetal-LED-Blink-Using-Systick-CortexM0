@@ -1,21 +1,23 @@
 
 Discarded input sections
 
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .group         0x0000000000000000        0xc /tmp/ccKddPpn.o
- .text          0x0000000000000000        0x0 /tmp/ccKddPpn.o
- .data          0x0000000000000000        0x0 /tmp/ccKddPpn.o
- .bss           0x0000000000000000        0x0 /tmp/ccKddPpn.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .group         0x0000000000000000        0xc /tmp/ccn6tY9q.o
+ .text          0x0000000000000000        0x0 /tmp/ccn6tY9q.o
+ .data          0x0000000000000000        0x0 /tmp/ccn6tY9q.o
+ .bss           0x0000000000000000        0x0 /tmp/ccn6tY9q.o
+ .text.delay_ms
+                0x0000000000000000       0x28 /tmp/ccn6tY9q.o
 
 Memory Configuration
 
@@ -26,119 +28,130 @@ sram             0x0000000020000000 0x0000000000004000 xrw
 
 Linker script and memory map
 
-LOAD /tmp/ccKddPpn.o
+LOAD /tmp/ccn6tY9q.o
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/../../../arm-none-eabi/lib/thumb/v6-m/nofp/libc_nano.a
 LOAD /usr/lib/gcc/arm-none-eabi/9.2.1/thumb/v6-m/nofp/libgcc.a
                 0x0000000020004000                _estack = (ORIGIN (sram) + LENGTH (sram))
 
 .vectors        0x0000000008000000       0x9c
  *(.vectors)
- .vectors       0x0000000008000000       0x9c /tmp/ccKddPpn.o
+ .vectors       0x0000000008000000       0x9c /tmp/ccn6tY9q.o
                 0x0000000008000000                vector_table
 
-.text           0x000000000800009c      0x118
+.text           0x000000000800009c       0xf0
  *(.text*)
  .text.SysTick_Handler
-                0x000000000800009c       0x10 /tmp/ccKddPpn.o
+                0x000000000800009c       0x38 /tmp/ccn6tY9q.o
                 0x000000000800009c                SysTick_Handler
- .text.timer_expired
-                0x00000000080000ac       0x28 /tmp/ccKddPpn.o
-                0x00000000080000ac                timer_expired
+ .text.NMI_Handler
+                0x00000000080000d4        0x2 /tmp/ccn6tY9q.o
+                0x00000000080000d4                NMI_Handler
+ .text.HardFault_Handler
+                0x00000000080000d6        0x2 /tmp/ccn6tY9q.o
+                0x00000000080000d6                HardFault_Handler
+ .text.SVC_Handler
+                0x00000000080000d8        0x2 /tmp/ccn6tY9q.o
+                0x00000000080000d8                SVC_Handler
+ .text.PendSV_Handler
+                0x00000000080000da        0x2 /tmp/ccn6tY9q.o
+                0x00000000080000da                PendSV_Handler
+ .text.init_systick
+                0x00000000080000dc       0x24 /tmp/ccn6tY9q.o
+                0x00000000080000dc                init_systick
  .text.startup.main
-                0x00000000080000d4       0xa8 /tmp/ccKddPpn.o
-                0x00000000080000d4                main
- .text._reset   0x000000000800017c       0x38 /tmp/ccKddPpn.o
-                0x000000000800017c                _reset
+                0x0000000008000100       0x54 /tmp/ccn6tY9q.o
+                0x0000000008000100                main
+ .text._reset   0x0000000008000154       0x38 /tmp/ccn6tY9q.o
+                0x0000000008000154                _reset
 
-.glue_7         0x00000000080001b4        0x0
- .glue_7        0x00000000080001b4        0x0 linker stubs
+.glue_7         0x000000000800018c        0x0
+ .glue_7        0x000000000800018c        0x0 linker stubs
 
-.glue_7t        0x00000000080001b4        0x0
- .glue_7t       0x00000000080001b4        0x0 linker stubs
+.glue_7t        0x000000000800018c        0x0
+ .glue_7t       0x000000000800018c        0x0 linker stubs
 
-.vfp11_veneer   0x00000000080001b4        0x0
- .vfp11_veneer  0x00000000080001b4        0x0 linker stubs
+.vfp11_veneer   0x000000000800018c        0x0
+ .vfp11_veneer  0x000000000800018c        0x0 linker stubs
 
-.v4_bx          0x00000000080001b4        0x0
- .v4_bx         0x00000000080001b4        0x0 linker stubs
+.v4_bx          0x000000000800018c        0x0
+ .v4_bx         0x000000000800018c        0x0 linker stubs
 
-.iplt           0x00000000080001b4        0x0
- .iplt          0x00000000080001b4        0x0 /tmp/ccKddPpn.o
+.iplt           0x000000000800018c        0x0
+ .iplt          0x000000000800018c        0x0 /tmp/ccn6tY9q.o
 
-.rel.dyn        0x00000000080001b4        0x0
- .rel.iplt      0x00000000080001b4        0x0 /tmp/ccKddPpn.o
+.rel.dyn        0x000000000800018c        0x0
+ .rel.iplt      0x000000000800018c        0x0 /tmp/ccn6tY9q.o
 
 .rodata
  *(.rodata*)
 
-.data           0x0000000020000000        0x2 load address 0x00000000080001b4
+.data           0x0000000020000000        0x3 load address 0x000000000800018c
                 0x0000000020000000                _sdata = .
  *(.first_data)
  *(.data SORT_BY_NAME(.data.*))
- .data.led      0x0000000020000000        0x2 /tmp/ccKddPpn.o
+ .data.led      0x0000000020000000        0x2 /tmp/ccn6tY9q.o
                 0x0000000020000000                led
-                0x0000000020000002                _edata = .
-                0x00000000080001b4                _srcdata = LOADADDR (.data)
+ .data.led_state.4302
+                0x0000000020000002        0x1 /tmp/ccn6tY9q.o
+                0x0000000020000003                _edata = .
+                0x000000000800018c                _srcdata = LOADADDR (.data)
 
-.igot.plt       0x0000000020000004        0x0 load address 0x00000000080001b6
- .igot.plt      0x0000000020000004        0x0 /tmp/ccKddPpn.o
+.igot.plt       0x0000000020000004        0x0 load address 0x000000000800018f
+ .igot.plt      0x0000000020000004        0x0 /tmp/ccn6tY9q.o
 
-.bss            0x0000000020000004        0x8 load address 0x00000000080001b6
-                0x0000000020000004                _sbss = .
+.bss            0x0000000020000003        0x0 load address 0x000000000800018f
+                0x0000000020000003                _sbss = .
  *(.bss SORT_BY_NAME(.bss.*) COMMON)
- .bss.on.4307   0x0000000020000004        0x1 /tmp/ccKddPpn.o
- *fill*         0x0000000020000005        0x3 
- .bss.s_ticks   0x0000000020000008        0x4 /tmp/ccKddPpn.o
-                0x000000002000000c                _ebss = .
+                0x0000000020000003                _ebss = .
 OUTPUT(firmware.elf elf32-littlearm)
 LOAD linker stubs
 
-.debug_info     0x0000000000000000      0x562
- .debug_info    0x0000000000000000      0x562 /tmp/ccKddPpn.o
+.debug_info     0x0000000000000000      0x53c
+ .debug_info    0x0000000000000000      0x53c /tmp/ccn6tY9q.o
 
-.debug_abbrev   0x0000000000000000      0x2b5
- .debug_abbrev  0x0000000000000000      0x2b5 /tmp/ccKddPpn.o
+.debug_abbrev   0x0000000000000000      0x2a4
+ .debug_abbrev  0x0000000000000000      0x2a4 /tmp/ccn6tY9q.o
 
-.debug_loc      0x0000000000000000      0x141
- .debug_loc     0x0000000000000000      0x141 /tmp/ccKddPpn.o
+.debug_loc      0x0000000000000000       0xf6
+ .debug_loc     0x0000000000000000       0xf6 /tmp/ccn6tY9q.o
 
-.debug_aranges  0x0000000000000000       0x38
+.debug_aranges  0x0000000000000000       0x60
  .debug_aranges
-                0x0000000000000000       0x38 /tmp/ccKddPpn.o
+                0x0000000000000000       0x60 /tmp/ccn6tY9q.o
 
-.debug_ranges   0x0000000000000000       0xc8
- .debug_ranges  0x0000000000000000       0xc8 /tmp/ccKddPpn.o
+.debug_ranges   0x0000000000000000       0xd8
+ .debug_ranges  0x0000000000000000       0xd8 /tmp/ccn6tY9q.o
 
 .debug_macro    0x0000000000000000     0x1536
- .debug_macro   0x0000000000000000       0xcc /tmp/ccKddPpn.o
- .debug_macro   0x00000000000000cc      0xa72 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000b3e       0x22 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000b60       0x46 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000ba6       0x18 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000bbe       0x94 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000c52       0x3c /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000c8e      0x103 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000d91       0x3a /tmp/ccKddPpn.o
- .debug_macro   0x0000000000000dcb      0x34e /tmp/ccKddPpn.o
- .debug_macro   0x0000000000001119       0x82 /tmp/ccKddPpn.o
- .debug_macro   0x000000000000119b      0x379 /tmp/ccKddPpn.o
- .debug_macro   0x0000000000001514       0x22 /tmp/ccKddPpn.o
+ .debug_macro   0x0000000000000000       0xcc /tmp/ccn6tY9q.o
+ .debug_macro   0x00000000000000cc      0xa72 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000b3e       0x22 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000b60       0x46 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000ba6       0x18 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000bbe       0x94 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000c52       0x3c /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000c8e      0x103 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000d91       0x3a /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000000dcb      0x34e /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000001119       0x82 /tmp/ccn6tY9q.o
+ .debug_macro   0x000000000000119b      0x379 /tmp/ccn6tY9q.o
+ .debug_macro   0x0000000000001514       0x22 /tmp/ccn6tY9q.o
 
-.debug_line     0x0000000000000000      0x390
- .debug_line    0x0000000000000000      0x390 /tmp/ccKddPpn.o
+.debug_line     0x0000000000000000      0x420
+ .debug_line    0x0000000000000000      0x420 /tmp/ccn6tY9q.o
 
-.debug_str      0x0000000000000000     0x4d8f
- .debug_str     0x0000000000000000     0x4d8f /tmp/ccKddPpn.o
-                                       0x4f47 (size before relaxing)
+.debug_str      0x0000000000000000     0x4dd2
+ .debug_str     0x0000000000000000     0x4dd2 /tmp/ccn6tY9q.o
+                                       0x4f84 (size before relaxing)
 
 .comment        0x0000000000000000       0x59
- .comment       0x0000000000000000       0x59 /tmp/ccKddPpn.o
+ .comment       0x0000000000000000       0x59 /tmp/ccn6tY9q.o
                                          0x5a (size before relaxing)
 
 .ARM.attributes
                 0x0000000000000000       0x2c
  .ARM.attributes
-                0x0000000000000000       0x2c /tmp/ccKddPpn.o
+                0x0000000000000000       0x2c /tmp/ccn6tY9q.o
 
-.debug_frame    0x0000000000000000       0x70
- .debug_frame   0x0000000000000000       0x70 /tmp/ccKddPpn.o
+.debug_frame    0x0000000000000000       0xbc
+ .debug_frame   0x0000000000000000       0xbc /tmp/ccn6tY9q.o
