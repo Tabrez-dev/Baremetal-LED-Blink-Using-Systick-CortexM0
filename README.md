@@ -34,7 +34,6 @@ This project is inspired by the [bare-metal-programming-guide](https://github.co
 1. **Clone the Repository**:
    ```
    git clone https://github.com/Tabrez-dev/STM32-Systick-Device-Driver-Cortex-M0.git
-   cd STM32-Systick-Device-Driver-Cortex-M0
    ```
 
 2. **Build the Project**:
