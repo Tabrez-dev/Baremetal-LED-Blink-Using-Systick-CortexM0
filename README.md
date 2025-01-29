@@ -67,3 +67,5 @@ After the J-Link firmware is installed on the ST-Link, you can use Segger Ozone 
 ![image](https://github.com/user-attachments/assets/a458cbcc-68ad-4df5-b715-e30ca1bf9022)
 
 Do Not Forget To Add .svd file in **Peripherals** to use Ozone properly for this board. Use appropriate .svd file for your board. 
+
+Note: STLinkReflash utility runs on Windows only. I used windows to downlaod J-Link firmware on the st-link debugger and Ubuntu to run ozone and do rest of the project.
