@@ -3,7 +3,8 @@
 This repository provides a bare-metal **SysTick** driver for the STM32F072RBT6 Cortex-M0 microcontroller, enabling the configuration of SysTick in both **polling** and **interrupt** modes. It also includes human-readable functions for GPIO initialization and a Makefile that supports flashing via **J-Link** and **ST-Flash** (ST-Link v2). 
 
 **Inspiration**
-This project is inspired by the bare-metal-programming-guide. I am deeply grateful to the author of that repository for their clear and insightful explanation of embedded programming concepts.
+
+This project is inspired by the [bare-metal-programming-guide](https://github.com/cpq/bare-metal-programming-guide). I am deeply grateful to the author of that repository for their clear and insightful explanation of embedded programming concepts.
 
 ## Features:
 - **SysTick Configuration**: 
